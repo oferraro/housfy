@@ -44,6 +44,8 @@
 `composer install`
 - Copy .env of Laravel project
 `cp .env.example .env`
+- Delete (if exists) /tmp/log
+`rm /tmp/log`
 - Run the queue consumer
 `php consumer.php`
 
