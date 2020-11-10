@@ -27,3 +27,23 @@
 ## Suggestions / improvements
 - Implement events subscriptions for the consumer with Nodejs and PM2 or a command with cron to ensure it works always any other way instead of a simple PHP script
 - Check if redis and rabbit are available, if not, just not use them (to be able to run easily php artisan serve)
+
+### Running the app from zero
+- Download the Repo
+`git clone https://github.com/oferraro/housfy.git`
+- Enter in Docker folder
+`cd housfy/docker`
+- Copy config file conf/env_example to conf/.env
+`cp conf/env_example conf/.env`
+- Run Docker
+`docker-compose up`
+- Enter in Docker/http for init consumer (Rabbit queue)
+`docker exec -it housfy-http bash`
+`cd web`
+- Install dependencies 
+`composer install`
+- Copy .env of Laravel project
+`cp .env.example .env`
+- Run the queue consumer
+`php consumer.php`
+

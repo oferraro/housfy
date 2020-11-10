@@ -12,7 +12,7 @@ $queue = 'offices';
 $channel->queue_declare($queue, false, false, false, false);
 
 if (env('APP_ENV')) {
-    error_log(" [*] Waiting for messages. To exit press CTRL+C\n", "\n", 3, '/tmp/log');
+    error_log(" [*] Waiting for messages. To exit press CTRL+C\n", 3, '/tmp/log');
 }
 
 $callback = function ($msg) {
