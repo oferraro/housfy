@@ -1,0 +1,8 @@
+MYSQL_HOST=housfy-mariadb
+MYSQL_ROOT_PASSWORD=housfyrootpasswd
+MYSQL_USER=housfyuser
+MYSQL_PASSWORD=housfypasswd
+MYSQL_DATABASE=housfydb
+
+WORK_DIR=/var/www/html
+

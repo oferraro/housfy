@@ -1,0 +1,47 @@
+version: "3.2"
+
+services:
+  redis:
+    image: "redis:alpine"
+    container_name: housfy-redis
+    command: redis-server --requirepass v#p@>)*F&2KxJT8% # Just for dev env
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: housfy-rabbitmq
+    ports:
+      - "4369:4369"
+      - "5672:5672"
+      - "15672:15672"     # Plugin port
+      - "25672:25672"
+      - "35197:35197"
+  web:
+    container_name: housfy-http
+    build:
+      context: ./http/
+      dockerfile: Dockerfile
+    env_file:
+      - ./conf/.env
+    ports:
+      - "8080:80"
+    volumes:
+      - ../web:/var/www/html/web
+    links:
+      - housfy-mariadb
+      - rabbitmq
+  housfy-mariadb:
+    container_name: housfy-mariadb
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - housfy-db:/var/lib/mysql
+    env_file:
+      - ./conf/.env
+volumes:
+  housfy-db: # This is for mariadb
+
+# TODO: use a build script to set dev server passwords
